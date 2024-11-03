@@ -1,0 +1,94 @@
+<div class="container">
+    <ul *ngFor="let valor of lista(); index as i">
+        <li>{{i}} {{ valor }}</li>
+    </ul>
+    
+    <br>
+    <p> {{ 'Corey'.repeat(4) }} </p>
+    <p>La suma de 3 + 3 es: {{3+3}}</p>
+    <img [src]="img" alt="" srcset="">
+    <input type="text" [value]="name()">
+    <button type="button" [disabled]="hidden">Click me</button>
+    
+    <hr>
+    <h2>Click y doble Click</h2>
+    <button (click)="clickHandler()">Click</button>
+    <br>
+    <button (dblclick)="dblclickHandler()">Doble Click</button>
+    <br>
+    <p>(change)</p>
+    <input type="text" (change)="changeHandler($event)" [value]="name()">
+    <p>(keydown)</p>
+    <input type="text" (keydown)="keydownHandler($event)" [value]="name()">
+    <br>
+    <p>Sinal</p>
+    <input type="text" (change)="signal($event)" [value]="name()">
+    <br>
+    <h3>if y else</h3>
+    <input type="number" [value]="person().age"  (change)="changeAge($event)">
+    <br>
+    <div *ngIf="person().name === 'luis' && person().age > 18; else elseBlock">
+        Soy luis y soy mayor de edad
+    </div>
+    <ng-template #elseBlock>
+        No soy mayor de edad
+    </ng-template>
+    <br>
+    <h3>Switch</h3>
+    <div [ngSwitch]="person().name">
+        <p *ngSwitchCase="'luis'">Soy luis</p>
+        <p *ngSwitchCase="'fernando'">Soy fernando</p>
+        <p *ngSwitchDefault>No soy ningua de esas personas</p>
+    </div>
+
+    <br>
+    <h3>Formcontrol</h3>
+    <input type="color" [formControl]="colorCtrl">
+    <p>Color {{ colorCtrl.value }}</p>
+
+    <br>
+    <h3>estilos al modo</h3>
+    <input type="number" [formControl]="widthCtrl">
+    <span style="display: block; background-color: rebeccapurple; height: 10px;" [style.width.px]="widthCtrl.value"></span>
+
+    <br>
+    <h3>clases</h3>
+    <p>
+        <input class="box" type="text" [formControl]="classCtrl">
+        <span class="box" class="message-error" [class.show]="classCtrl.invalid && classCtrl.touched">Nombre invalido</span>
+    </p>
+    <br>
+    <h3>Nueva sintaxys if</h3>
+    @if (person().name == 'luis') {
+        <div>Soy luis</div>
+    }
+
+    @if (person().name == 'luis' && person().age > 18) {
+        <div>Soy luis y soy mayor de 18</div>
+    } @else {
+        <div>No soy mayor de edad</div>
+    }
+    <hr>
+    <h3>NUeva sintaxys for</h3>
+    <!--variable iteradora, identificador de elemento, indices-->
+    @for(task of tasks(); track task; let i = $index) {
+        <li>{{i}} {{task.task}}</li>
+    } @empty {
+        <li><strong>La lista esta vacía</strong></li>
+    }
+
+    <hr>
+
+    <h3>Nueva sintaxys switch</h3>
+    @switch (person().name) {
+        @case ('luis') {
+            <p>soy luis</p>
+        }
+        @case ('ana') {
+            <p>soy ana</p>
+        }
+        @default {
+            <p>Soy una persona diferente</p>
+        }
+    }
+</div>
