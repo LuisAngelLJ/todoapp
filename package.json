@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "e2e": "npm run build && playwright test",
+    "e2e:install": "npm install playwright",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +21,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "cypress": "^13.15.1",
+    "playwright": "^1.48.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -26,7 +31,9 @@
     "@angular-devkit/build-angular": "^18.2.4",
     "@angular/cli": "^18.2.4",
     "@angular/compiler-cli": "^18.2.0",
+    "@cypress/schematic": "^2.5.2",
     "@types/jasmine": "~5.1.0",
+    "cypress": "latest",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

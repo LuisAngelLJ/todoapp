@@ -47,13 +47,13 @@ export class HomeComponent implements OnInit {
       //cada qye una tarea cambie voy a guardar en el localStorage
       const tasks = this.tasks();
       console.log("Run effect");
-      localStorage.setItem('tasks', JSON.stringify(tasks));
+      localStorage.setItem('mydayapp-angular', JSON.stringify(tasks));
     })
   }
 
   ngOnInit(): void {
     //leer el array detareas almacenadas en localStorage
-    const localTasks = localStorage.getItem('tasks');
+    const localTasks = localStorage.getItem('mydayapp-angular');
     if(localTasks) {
       this.tasks.set( JSON.parse(localTasks) );
     }
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
   newValuesTasks() {
     if(this.newTaskCtrl.valid && this.newTaskCtrl.value.trimStart().trimEnd() != '') {
       const value = this.newTaskCtrl.value;
-      this.addTasks(value);
+      this.addTasks(value.trimStart().trimEnd());
       //limpiar el input
       this.newTaskCtrl.setValue('');
     }
@@ -140,5 +140,17 @@ export class HomeComponent implements OnInit {
 
   changeFilter(filter: string) {
     this.filter.set(filter)
+  }
+
+  closeTask(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.tasks.update( prevState => {
+      return prevState.map( (task) => {
+        return {
+          ...task,
+          editing: false
+        }
+      })
+    })
   }
 }
